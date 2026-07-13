@@ -1,0 +1,46 @@
+:root {
+  --bg: #0f172a;
+  --panel: #1e293b;
+  --text: #e2e8f0;
+  --accent: #6366f1;
+  --border: #334155;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+main { max-width: 900px; margin: 0 auto; padding: 2rem; }
+h1 { margin-top: 0; }
+form { display: flex; flex-direction: column; gap: .5rem; max-width: 420px; }
+label { font-weight: 600; font-size: .9rem; }
+input, select {
+  padding: .5rem; border: 1px solid var(--border);
+  border-radius: 6px; background: var(--panel); color: var(--text);
+}
+button {
+  padding: .5rem .9rem; border: none; border-radius: 6px;
+  background: var(--accent); color: white; cursor: pointer; font-weight: 600;
+}
+button:disabled { opacity: .6; cursor: not-allowed; }
+.error { color: #f87171; }
+.issues-header { display: flex; justify-content: space-between; align-items: center; }
+.issues-list { list-style: none; padding: 0; }
+.issue-row {
+  display: flex; align-items: center; gap: .75rem;
+  padding: .6rem; border: 1px solid var(--border);
+  border-radius: 8px; margin-bottom: .5rem; background: var(--panel);
+}
+.issue-title { flex: 1; }
+.badge {
+  padding: .15rem .5rem; border-radius: 999px;
+  font-size: .75rem; font-weight: 700;
+}
+.badge-critical { background: #7f1d1d; }
+.badge-high { background: #9a3412; }
+.badge-medium { background: #854d0e; }
+.badge-low { background: #14532d; }
+.badge-status { background: #1e3a8a; }
+.create-issue { margin-bottom: 2rem; }

@@ -1,0 +1,11 @@
+{
+  "name": "trackit",
+  "version": "1.0.0",
+  "private": true,
+  "description": "TrackIt issue tracker — application under test for a full QA portfolio suite",
+  "scripts": {
+    "dev:server": "npm --prefix server run dev",
+    "dev:client": "npm --prefix client run dev",
+    "seed": "npm --prefix server run seed"
+  }
+}
