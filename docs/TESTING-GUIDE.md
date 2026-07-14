@@ -101,7 +101,11 @@ Run against the live Express server (seeded, or with an in-memory DB via
 
 Seed the DB first for a deterministic baseline.
 - Log in with seeded credentials → land on `/issues`.
-- Create an issue via the form → it appears in the list.
+- Create an issue via the form (title + priority + assignee) → it appears in the list.
+- Change an issue's status via the per-row `Change status…` dropdown → the status
+  badge updates and a `role="status"` notice appears. The dropdown only offers
+  *legal* next-statuses (mirrors the server workflow).
+- Reassign an issue via the per-row assignee dropdown → the assignee label updates.
 - Apply the status filter → list narrows.
 - Delete an issue → it disappears.
 - Protected route: visiting `/issues` unauthenticated redirects to `/login`.

@@ -99,16 +99,26 @@ a:hover { text-decoration: underline; color: var(--accent-hover); }
 .issue-row {
   display: flex;
   align-items: center;
-  gap: .75rem;
-  padding: .75rem 1rem;
+  gap: 1rem;
+  padding: .85rem 1rem;
   border: 1px solid var(--border);
   border-radius: 10px;
   margin-bottom: .5rem;
   background: var(--panel);
   transition: border-color .15s;
+  flex-wrap: wrap;
 }
 .issue-row:hover { border-color: var(--accent); }
-.issue-title { flex: 1; font-weight: 500; }
+.issue-main { flex: 1; min-width: 200px; display: flex; flex-direction: column; gap: .15rem; }
+.issue-title { font-weight: 500; }
+.issue-meta { font-size: .8rem; color: var(--text-muted); }
+.issue-badges { display: flex; gap: .5rem; align-items: center; }
+.issue-actions { display: flex; gap: .5rem; align-items: center; }
+.issue-actions select { font-size: .8rem; padding: .35rem .5rem; }
+
+/* Field grouping (create form) */
+.field { display: flex; flex-direction: column; gap: .3rem; }
+.notice { color: #6ee7b7; font-size: .85rem; }
 
 /* Badges */
 .badge {
