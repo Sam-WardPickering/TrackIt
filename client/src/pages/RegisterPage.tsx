@@ -68,6 +68,12 @@ export function RegisterPage() {
           {loading ? 'Creating…' : 'Create account'}
         </button>
       </form>
+      <p>
+        Already have an account?{' '}
+        <a href="/login" data-test="login-link">
+          Sign in
+        </a>
+      </p>
     </main>
   );
 }
