@@ -1,5 +1,6 @@
 import { canTransition, getAllowedTransitions } from '../../../server/src/logic/statusTransitions';
 import { describe, it, expect } from 'vitest';
+import type { Issue, IssueStatus } from '../../../server/src/types/index';
 
 describe('canTransition', () => {
 
@@ -80,4 +81,12 @@ describe('canTransition', () => {
             expect(canTransition('closed', 'closed')).toBe(false);
         });
     });
+});
+
+describe('getAllowedTransitions', () => {
+    const openTransitions: IssueStatus[] = ['in_progress', 'closed'];
+    const inProgressTransitions: IssueStatus[] = ['resolved', 'open', 'closed'];
+    const resolvedTransitions: IssueStatus[] = ['closed', 'open'];
+    const closedTransitions: IssueStatus[] = ['open'];
+
 });
