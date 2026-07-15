@@ -1,5 +1,6 @@
 import { priorityWeight, sortByPriority } from '../../../server/src/logic/prioritySort';
 import { describe, it, expect } from 'vitest';
+import { Issue } from '../../../server/src/types';
 
 describe('priorityWeight', () => {
     const criticalPriority: number = 4;
@@ -22,4 +23,8 @@ describe('priorityWeight', () => {
     it('should return low priority weight', () => {
         expect(priorityWeight('low')).toBe(lowPriority);
     });
+});
+
+describe('sortByPriority', () => {
+    const issuesUnsorted: Issue[] = [];
 });
