@@ -89,4 +89,20 @@ describe('getAllowedTransitions', () => {
     const resolvedTransitions: IssueStatus[] = ['closed', 'open'];
     const closedTransitions: IssueStatus[] = ['open'];
 
+    it('should return valid open transitions array', () => {
+        expect(getAllowedTransitions('open')).toEqual(openTransitions);
+    });
+
+    it('should return valid in_progress transitions array', () => {
+        expect(getAllowedTransitions('in_progress')).toEqual(inProgressTransitions);
+    });
+
+    it('should return valid resolved transitions array', () => {
+        expect(getAllowedTransitions('resolved')).toEqual(resolvedTransitions);
+    });
+
+    it('should return valid closed transitions array', () => {
+        expect(getAllowedTransitions('closed')).toEqual(closedTransitions);
+    });
+
 });
