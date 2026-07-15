@@ -44,6 +44,7 @@ describe('canTransition', () => {
     });
 
     describe('invalid transitions', () => {
+
         it('should not allow open to resolved', () => {
             expect(canTransition('open', 'resolved')).toBe(false);
         });
@@ -58,6 +59,25 @@ describe('canTransition', () => {
 
         it('should not allow closed to resolved', () => {
             expect(canTransition('closed', 'resolved')).toBe(false);
+        });
+    });
+
+    describe('same-status transitions', () => {
+
+        it('should block open to open', () => {
+            expect(canTransition('open', 'open')).toBe(false);
+        });
+
+        it('should block in_progress to in_progress', () => {
+            expect(canTransition('in_progress', 'in_progress')).toBe(false);
+        });
+
+        it('should block resolved to resolved', () => {
+            expect(canTransition('resolved', 'resolved')).toBe(false);
+        });
+
+        it('should block closed to closed', () => {
+            expect(canTransition('closed', 'closed')).toBe(false);
         });
     });
 });
