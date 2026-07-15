@@ -1,6 +1,6 @@
 import { canTransition, getAllowedTransitions } from '../../../server/src/logic/statusTransitions';
 import { describe, it, expect } from 'vitest';
-import type { Issue, IssueStatus } from '../../../server/src/types/index';
+import type { IssueStatus } from '../../../server/src/types/index';
 
 describe('canTransition', () => {
 
