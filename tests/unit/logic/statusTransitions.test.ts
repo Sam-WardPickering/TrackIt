@@ -43,7 +43,21 @@ describe('canTransition', () => {
 
     });
 
-    // describe('invalid transitions', () => {
+    describe('invalid transitions', () => {
+        it('should not allow open to resolved', () => {
+            expect(canTransition('open', 'resolved')).toBe(false);
+        });
 
-    // });
+        it('should not allow resolved to in_progress', () => {
+            expect(canTransition('resolved', 'in_progress')).toBe(false);
+        });
+
+        it('should not allow closed to in_progress', () => {
+            expect(canTransition('closed', 'in_progress')).toBe(false);
+        });
+
+        it('should not allow closed to resolved', () => {
+            expect(canTransition('closed', 'resolved')).toBe(false);
+        });
+    });
 });
