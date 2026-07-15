@@ -7,5 +7,8 @@
     "dev:server": "npm --prefix server run dev",
     "dev:client": "npm --prefix client run dev",
     "seed": "npm --prefix server run seed"
+  },
+  "devDependencies": {
+    "vitest": "^4.1.10"
   }
 }
