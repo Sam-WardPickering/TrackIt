@@ -39,5 +39,18 @@ describe('priorityWeight', () => {
 });
 
 describe('sortByPriority', () => {
-    const issuesUnsorted: Issue[] = [];
+
+    const unsorted = [
+        mockIssue({ id: 1, priority: 'low' }),
+        mockIssue({ id: 2, priority: 'critical' }),
+        mockIssue({ id: 3, priority: 'medium' }),
+    ];
+
+    it('should sort by priority', () => {
+        const sorted = sortByPriority(unsorted);
+
+        expect(sorted[0].id).toBe(2);  // critical first
+        expect(sorted[1].id).toBe(3);  // medium second
+        expect(sorted[2].id).toBe(1);  // low last
+    });
 });
