@@ -63,4 +63,16 @@ describe('sortByPriority', () => {
         expect(sorted[0].id).toBe(2);   // more recent update comes first
         expect(sorted[1].id).toBe(1);
     });
+
+    it('should not mutate the original array', () => {
+        const original = [
+            mockIssue({ id: 1, priority: 'low' }),
+            mockIssue({ id: 2, priority: 'critical' }),
+        ];
+
+        sortByPriority(original);
+
+        expect(original[0].id).toBe(1);
+        expect(original[1].id).toBe(2);
+    });
 });
