@@ -15,15 +15,6 @@ const mockIssue = (overrides: Partial<Issue>): Issue => ({
   ...overrides,
 });
 
-const mockUser = (overrides: Partial<User>): User => ({
-    id: 67,
-    email: 'mockuser67@email.com',
-    name: 'John',
-    role: 'member', // either 'member' | 'admin';
-    created_at: '2024-01-01',
-    ...overrides,
-});
-
 describe('canEditIssue', () => {
 
 });
