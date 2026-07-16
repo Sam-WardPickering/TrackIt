@@ -46,11 +46,22 @@ describe('sortByPriority', () => {
         mockIssue({ id: 3, priority: 'medium' }),
     ];
 
+    const tied = [
+        mockIssue({ id: 1, priority: 'high', updated_at: '2024-01-01' }),
+        mockIssue({ id: 2, priority: 'high', updated_at: '2024-06-01' }),
+    ];
+
     it('should sort by priority', () => {
         const sorted = sortByPriority(unsorted);
-
         expect(sorted[0].id).toBe(2);  // critical first
         expect(sorted[1].id).toBe(3);  // medium second
         expect(sorted[2].id).toBe(1);  // low last
+    });
+
+    it('should sort by updated timestamp when priorities are the same', () => {
+        const sorted = sortByPriority(tied);
+
+        expect(sorted[0].id).toBe(2);   // more recent update comes first
+        expect(sorted[1].id).toBe(1);
     });
 });
