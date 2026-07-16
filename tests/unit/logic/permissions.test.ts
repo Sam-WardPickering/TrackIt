@@ -15,6 +15,22 @@ const mockIssue = (overrides: Partial<Issue>): Issue => ({
   ...overrides,
 });
 
+/*
+Tests:
+-Admin can edit ANY issue.
+-Admin can delete ANY issue.
+
+-Member can edit issue they are REPORTER of. 
+-Member can edit issue they are ASSIGNEE of.
+
+-Member who is REPORTER can delete issue.
+
+-Member who is ASSIGNEE cannot delete issue.
+-Member who is neither REPORTER or ASSIGNEE cannot edit issue.
+-Member who is neither REPORTER or ASSIGNEE cannot delete issue.
+
+*/
+
 describe('canEditIssue', () => {
 
 });
