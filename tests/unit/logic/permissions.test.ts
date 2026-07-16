@@ -32,9 +32,14 @@ Tests:
 */
 
 describe('canEditIssue', () => {
+    it('should allow an admin to edit an issue', () => {
+        const admin = { id: 4, role: 'admin' as const };
+        const issue = mockIssue({});
 
+        expect(canEditIssue(admin, issue)).toBe(true);
+    });
 });
 
-describe('canDeleteIssue', () => {
+// describe('canDeleteIssue', () => {
 
-});
+// });
