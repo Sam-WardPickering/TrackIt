@@ -38,6 +38,13 @@ describe('canEditIssue', () => {
 
         expect(canEditIssue(admin, issue)).toBe(true);
     });
+
+    it('should allow a member to edit issue they are reporter of', () => {
+        const member = { id: 10, role: 'member' as const };
+        const issue = mockIssue({ reporter_id: 10 });
+
+        expect(canEditIssue(member, issue)).toBe(true);
+    });
 });
 
 // describe('canDeleteIssue', () => {
