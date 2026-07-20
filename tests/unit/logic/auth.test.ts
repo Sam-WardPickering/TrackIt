@@ -34,3 +34,14 @@ describe('verifyPassword', () => {
         expect(await verifyPassword('Password123', hash)).toBe(false);
     });
 });
+
+describe('signToken', () => {
+    it('should return a string', () => {
+        const token = signToken({ userId: 1, role: 'admin' });
+        expect(typeof token).toBe('string');
+    });
+});
+
+describe('verifyToken', () => {
+
+});
