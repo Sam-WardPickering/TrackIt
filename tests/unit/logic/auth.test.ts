@@ -29,7 +29,7 @@ describe('verifyPassword', () => {
         expect(await verifyPassword(password, hash)).toBe(true);
     });
 
-    it('should return false when has and password do not match', async () => {
+    it('should return false when hash and password do not match', async () => {
         const hash = await hashPassword(password);
         expect(await verifyPassword('Password123', hash)).toBe(false);
     });
