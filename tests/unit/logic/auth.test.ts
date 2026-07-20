@@ -5,6 +5,16 @@ import type { AuthPayload, UserRole } from '../../../server/src/types/index';
 describe('hashPassword', () => {
     const password: string = 'Password123';
 
+    it('should return a string', async () => {
+        const hash = await hashPassword(password);
+        expect(typeof hash).toBe('string');
+    });
+
+    it('should return a string of 60 characters', async () => {
+        const hash = await hashPassword(password);
+        expect(hash.length).toBeGreaterThanOrEqual(60);
+    });
+
     it('should not return the plaintext password', async () => {
         const hash = await hashPassword(password);
         expect(hash).not.toBe(password);
