@@ -20,3 +20,11 @@ describe('hashPassword', () => {
         expect(hash).not.toBe(password);
     });
 });
+
+describe('verifyPassword', () => {
+    it('should return true when hash and password match', async () => {
+        const password: string = 'Password123!';
+        const hash = await hashPassword(password);
+        expect(await verifyPassword(password, hash)).toBe(true);
+    });
+});
