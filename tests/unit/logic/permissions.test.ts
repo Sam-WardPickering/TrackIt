@@ -21,7 +21,6 @@ Tests:
 -Member who is REPORTER can delete issue.
 
 -Member who is ASSIGNEE cannot delete issue.
--Member who is neither REPORTER or ASSIGNEE cannot edit issue.
 -Member who is neither REPORTER or ASSIGNEE cannot delete issue.
 
 */
@@ -56,6 +55,13 @@ describe('canEditIssue', () => {
     });
 });
 
-// describe('canDeleteIssue', () => {
+describe('canDeleteIssue', () => {
+    it('should allow an admin to delete an issue', () => {
+        const admin = { id: 11, role: 'admin' as const };
+        const issue = mockIssue({});
 
-// });
+        expect(canDeleteIssue(admin, issue)).toBe(true);
+    });
+
+    
+});
