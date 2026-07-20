@@ -70,7 +70,7 @@ describe('canDeleteIssue', () => {
         expect(canDeleteIssue(member, issue)).toBe(true);
     });
 
-    it('should allow a member to delete issue they are assigned to', () => {
+    it('should not allow a member to delete issue they are assigned to', () => {
         const member = { id: 15, role: 'member' as const };
         const issue = mockIssue({ assignee_id: 15 });
 
