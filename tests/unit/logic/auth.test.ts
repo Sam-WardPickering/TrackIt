@@ -22,9 +22,15 @@ describe('hashPassword', () => {
 });
 
 describe('verifyPassword', () => {
+    const password: string = 'Password123!';
+
     it('should return true when hash and password match', async () => {
-        const password: string = 'Password123!';
         const hash = await hashPassword(password);
         expect(await verifyPassword(password, hash)).toBe(true);
+    });
+
+    it('should return false when has and password do not match', async () => {
+        const hash = await hashPassword(password);
+        expect(await verifyPassword('Password123', hash)).toBe(false);
     });
 });
