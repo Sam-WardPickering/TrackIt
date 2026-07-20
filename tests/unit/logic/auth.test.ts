@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { hashPassword, verifyPassword, signToken, verifyToken } from '../../../server/src/logic/auth';
 import type { AuthPayload, UserRole } from '../../../server/src/types/index';
+import { sign } from 'node:crypto';
 
 describe('hashPassword', () => {
     const password: string = 'Password123';
@@ -50,5 +51,8 @@ describe('verifyToken', () => {
         expect(result.role).toBe('member');
     });
 
-    
+    it('should throw on a tampered token', () => {
+        const token = signToken({ userId: 5, role: 'member' });
+        expect(() => verifyToken(token + 'x')).toThrow();
+    });
 });
