@@ -43,5 +43,12 @@ describe('signToken', () => {
 });
 
 describe('verifyToken', () => {
+    it('should return the original payload', () => {
+        const token = signToken({ userId: 5, role: 'member' });
+        const result = verifyToken(token);
+        expect(result.userId).toBe(5);
+        expect(result.role).toBe('member');
+    });
 
+    
 });
