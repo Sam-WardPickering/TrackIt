@@ -63,5 +63,24 @@ describe('canDeleteIssue', () => {
         expect(canDeleteIssue(admin, issue)).toBe(true);
     });
 
-    
+    it('should allow a member to delete issue they are reporter of', () => {
+        const member = { id: 10, role: 'member' as const };
+        const issue = mockIssue({ reporter_id: 10 });
+
+        expect(canDeleteIssue(member, issue)).toBe(true);
+    });
+
+    it('should allow a member to delete issue they are assigned to', () => {
+        const member = { id: 15, role: 'member' as const };
+        const issue = mockIssue({ assignee_id: 15 });
+
+        expect(canDeleteIssue(member, issue)).toBe(false);
+    });
+
+    it('should not allow a member who is neither reporter nor asignee to delete', () => {
+        const member = { id: 99, role: 'member' as const };
+        const issue = mockIssue({ reporter_id: 110, assignee_id: 111 });
+
+        expect(canDeleteIssue(member, issue)).toBe(false);
+    });
 });
