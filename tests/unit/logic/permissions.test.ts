@@ -18,9 +18,6 @@ const mockIssue = (overrides: Partial<Issue>): Issue => ({
 /*
 Tests:
 -Admin can delete ANY issue.
-
--Member can edit issue they are ASSIGNEE of.
-
 -Member who is REPORTER can delete issue.
 
 -Member who is ASSIGNEE cannot delete issue.
@@ -49,6 +46,13 @@ describe('canEditIssue', () => {
         const issue = mockIssue({ assignee_id: 15 });
 
         expect(canEditIssue(member, issue)).toBe(true);
+    });
+
+    it('should not allow a member who is neither reporter nor asignee to edit', () => {
+        const member = { id: 99, role: 'member' as const };
+        const issue = mockIssue({ reporter_id: 110, assignee_id: 111 });
+
+        expect(canEditIssue(member, issue)).toBe(false);
     });
 });
 
