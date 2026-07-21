@@ -43,4 +43,8 @@ describe('registerSchema', () => {
     it('rejects a name over 80 characters', () => {
         expect(registerSchema.safeParse({ ...validInput, name: 'A'.repeat(81)}).success).toBe(false);
     });
+
+    it('rejects an invalid email format', () => {
+        expect(registerSchema.safeParse({ ...validInput, email: 'not-an-email' }).success).toBe(false);
+    });
 });
