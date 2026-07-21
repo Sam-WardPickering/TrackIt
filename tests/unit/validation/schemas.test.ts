@@ -58,4 +58,8 @@ describe('loginSchema', () => {
     it('accepts a login with valid credentials (happy path)', () => {
         expect(loginSchema.safeParse(validInput).success).toBe(true);
     });
+
+    it('rejects a login with invalid email', () => {
+        expect(loginSchema.safeParse({ ...validInput, email: 'not-an-email' }).success).toBe(false);
+    });
 });
