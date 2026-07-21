@@ -62,4 +62,8 @@ describe('loginSchema', () => {
     it('rejects a login with invalid email', () => {
         expect(loginSchema.safeParse({ ...validInput, email: 'not-an-email' }).success).toBe(false);
     });
+
+    it('rejects a login with password below one character', () => {
+        expect(loginSchema.safeParse({ ...validInput, password: ''}).success).toBe(false);
+    });
 });
