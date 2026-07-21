@@ -48,3 +48,14 @@ describe('registerSchema', () => {
         expect(registerSchema.safeParse({ ...validInput, email: 'not-an-email' }).success).toBe(false);
     });
 });
+
+describe('loginSchema', () => {
+    const validInput = {
+        email: 'email@email.com',
+        password: 'Password1234',
+    };
+
+    it('accepts a login with valid credentials (happy path)', () => {
+        expect(loginSchema.safeParse(validInput).success).toBe(true);
+    });
+});
