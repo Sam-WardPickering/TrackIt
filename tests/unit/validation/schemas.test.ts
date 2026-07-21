@@ -33,14 +33,14 @@ describe('registerSchema', () => {
     });
 
     it('accepts name of exactly one character', () => {
-        expect(registerSchema.safeParse({ ...validInput, name: "" }).success).toBe(false);
+        expect(registerSchema.safeParse({ ...validInput, name: "a" }).success).toBe(true);
     });
 
     it('accepts name of exactly 80 characters', () => {
         expect(registerSchema.safeParse({ ...validInput, name: 'A'.repeat(80)}).success).toBe(true);
     });
 
-    it('rejects a passwsord over 80 characters', () => {
+    it('rejects a name over 80 characters', () => {
         expect(registerSchema.safeParse({ ...validInput, name: 'A'.repeat(81)}).success).toBe(false);
     });
 });
