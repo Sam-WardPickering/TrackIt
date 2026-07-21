@@ -19,4 +19,8 @@ describe('registerSchema', () => {
     it('accepts password of exactly 8 characters', () => {
         expect(registerSchema.safeParse({ ...validInput, password: 'password'}).success).toBe(true);
     });
+
+    it('rejects password of exactly 100 characters', () => {
+        expect(registerSchema.safeParse({ ...validInput, password: 'A'.repeat(100) }).success).toBe(true);
+    });
 });
