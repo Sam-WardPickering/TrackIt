@@ -27,4 +27,8 @@ describe('registerSchema', () => {
     it('rejects password over 100 characters', () => {
         expect(registerSchema.safeParse({ ...validInput, password: 'A'.repeat(101) }).success).toBe(false);
     });
+
+    it('rejects name below one character', () => {
+        expect(registerSchema.safeParse({ ...validInput, name: "" }).success).toBe(false);
+    });
 });
