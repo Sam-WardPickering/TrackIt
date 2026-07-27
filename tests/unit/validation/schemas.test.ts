@@ -76,7 +76,20 @@ describe('createIssueSchema', () => {
         assignee_id: 123456,
     };
 
-    it('accepts a issue with valid input (happy path)', () => {
+    it('creates a issue with valid input (happy path)', () => {
         expect(createIssueSchema.safeParse(validInput).success).toBe(true);
     });
+
+    it('rejects a issue with title length below minimum', () => {
+        expect(createIssueSchema.safeParse({ ...validInput, title: 'qw' }).success).toBe(false);
+    });
+
+    it('accepts a issue with title length at min boundary', () => {
+        expect(createIssueSchema.safeParse({ ...validInput, title: 'qwe' }).success).toBe(true);
+    });
+
+    it('accepts a issue with title length at upper boundary', () => {
+        expect(createIssueSchema.safeParse({ ...validInput, title: 'A'.repeat(120) }).success).toBe(true);
+    });
+
 });
