@@ -92,4 +92,8 @@ describe('createIssueSchema', () => {
         expect(createIssueSchema.safeParse({ ...validInput, title: 'A'.repeat(120) }).success).toBe(true);
     });
 
+    it('accepts a issue with title length above upper boundary', () => {
+        expect(createIssueSchema.safeParse({ ...validInput, title: 'A'.repeat(121) }).success).toBe(false);
+    });
+
 });
