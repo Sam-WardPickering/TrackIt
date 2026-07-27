@@ -125,4 +125,12 @@ describe('createIssueSchema', () => {
         });
     });
 
+    describe('assignee_id field validation', () => {
+        it('accepts an issue without assignee_id', () => {
+            const { assignee_id, ...inputWithoutAssignee } = validInput;
+            
+            expect(createIssueSchema.safeParse(inputWithoutAssignee).success).toBe(true);
+        });
+    });
+
 });
