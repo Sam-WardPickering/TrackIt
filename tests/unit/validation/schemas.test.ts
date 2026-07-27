@@ -143,6 +143,10 @@ describe('createIssueSchema', () => {
         it('rejects an issue with assignee_id as decimal value', () => {
             expect(createIssueSchema.safeParse({ ...validInput, assignee_id: 42.4 }).success).toBe(false);
         });
+
+        it('rejects an issue with assignee_id value that is not a number', () => {
+            expect(createIssueSchema.safeParse({ ...validInput, assignee_id: 'NaN' }).success).toBe(false);
+        });
     });
 
 });
