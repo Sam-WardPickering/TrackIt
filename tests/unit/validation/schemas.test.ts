@@ -135,6 +135,10 @@ describe('createIssueSchema', () => {
         it('accepts an issue with explicitly no assignee_id', () => {
             expect(createIssueSchema.safeParse({ ...validInput, assignee_id: null }).success).toBe(true);
         });
+
+        it('rejects an issue with assignee_id value below boundary', () => {
+            expect(createIssueSchema.safeParse({ ...validInput, assignee_id: 0 }).success).toBe(false);
+        });
     });
 
 });
