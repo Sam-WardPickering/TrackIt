@@ -99,13 +99,25 @@ describe('createIssueSchema', () => {
     });
 
     describe('description field validation', () => {
-
         it('accepts a issue with description length at upper boundary', () => {
             expect(createIssueSchema.safeParse({ ...validInput, description: 'A'.repeat(5000) }).success).toBe(true);
         });
 
         it('rejects a issue with description length over upper boundary', () => {
             expect(createIssueSchema.safeParse({ ...validInput, description: 'A'.repeat(5001) }).success).toBe(false);
+        });
+    });
+
+    describe('priority field validation', () => {
+        it('defaults to medium priority when field is ommitted', () => {
+            const { priority, ...inputWithoutPriority } = validInput;
+            const result = createIssueSchema.safeParse(inputWithoutPriority);
+
+            expect(result.success).toBe(true);
+
+            if (result.success) {
+                expect(result.data.priority).toBe('medium');
+            }
         });
     });
 
