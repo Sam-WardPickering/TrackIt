@@ -119,6 +119,10 @@ describe('createIssueSchema', () => {
                 expect(result.data.priority).toBe('medium');
             }
         });
+
+        it('rejects a issue with an invalid priority value', () => {
+            expect(createIssueSchema.safeParse({ ...validInput, priority: 'notapriority' }).success).toBe(false);
+        });
     });
 
 });
