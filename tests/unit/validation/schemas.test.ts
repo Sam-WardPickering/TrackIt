@@ -67,3 +67,16 @@ describe('loginSchema', () => {
         expect(loginSchema.safeParse({ ...validInput, password: ''}).success).toBe(false);
     });
 });
+
+describe('createIssueSchema', () => {
+    const validInput = {
+        title: 'Title',
+        description: 'Test Description',
+        priority: 'low',
+        assignee_id: 123456,
+    };
+
+    it('accepts a issue with valid input (happy path)', () => {
+        expect(createIssueSchema.safeParse(validInput).success).toBe(true);
+    });
+});
