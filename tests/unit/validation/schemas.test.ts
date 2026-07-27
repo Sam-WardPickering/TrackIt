@@ -126,10 +126,14 @@ describe('createIssueSchema', () => {
     });
 
     describe('assignee_id field validation', () => {
-        it('accepts an issue without assignee_id', () => {
+        it('accepts an issue with omitted assignee_id', () => {
             const { assignee_id, ...inputWithoutAssignee } = validInput;
             
             expect(createIssueSchema.safeParse(inputWithoutAssignee).success).toBe(true);
+        });
+
+        it('accepts an issue with explicitly no assignee_id', () => {
+            expect(createIssueSchema.safeParse({ ...validInput, assignee_id: null }).success).toBe(true);
         });
     });
 
