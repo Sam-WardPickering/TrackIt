@@ -215,14 +215,28 @@ describe('updateIssueSchema', () => {
             expect(updateIssueSchema.safeParse({ ...inputWithoutStatus, status: 'notastatus' }).success).toBe(false);
         });
     });
-   
-  
 
-    // status with invalid value
+    describe('assignee_id field validation', () => {
+        it('accepts an issue with omitted assignee_id', () => {
+            const { assignee_id, ...inputWithoutAssignee } = validInput;
+            
+            expect(updateIssueSchema.safeParse(inputWithoutAssignee).success).toBe(true);
+        });
 
-    // assignee_id negative value
-    // assignee_id nullable value
-    // assignee_id omitted value
-    // assignee_id decimal value
-    // assignee_id string value
+        it('accepts an issue with explicitly no assignee_id', () => {
+            expect(updateIssueSchema.safeParse({ ...validInput, assignee_id: null }).success).toBe(true);
+        });
+
+        it('rejects an issue with assignee_id value below boundary', () => {
+            expect(updateIssueSchema.safeParse({ ...validInput, assignee_id: 0 }).success).toBe(false);
+        });
+
+        it('rejects an issue with assignee_id as decimal value', () => {
+            expect(updateIssueSchema.safeParse({ ...validInput, assignee_id: 42.4 }).success).toBe(false);
+        });
+
+        it('rejects an issue with assignee_id value that is not a number', () => {
+            expect(updateIssueSchema.safeParse({ ...validInput, assignee_id: 'NaN' }).success).toBe(false);
+        });
+    });
 });
