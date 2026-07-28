@@ -150,3 +150,7 @@ describe('createIssueSchema', () => {
     });
 
 });
+
+describe('updateIssueSchema', () => {
+
+});
