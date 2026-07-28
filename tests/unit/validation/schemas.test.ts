@@ -152,5 +152,37 @@ describe('createIssueSchema', () => {
 });
 
 describe('updateIssueSchema', () => {
+    const validInput = {
+        title: 'title',
+        description: 'This is a test description',
+        priority: 'low',
+        status: 'open',
+        assignee_id: 12345,
+    };
 
+    it('accepts an issue with valid inputs (happy path)', () => {
+        expect(updateIssueSchema.safeParse(validInput).success).toBe(true);
+    });
+
+    // happy path
+    // only one field
+    // no fields
+
+    // title below lower boundary
+    // title lower boundary
+    // title upper boundary
+    // title above upper boundary
+
+    // desc upper boundary
+    // desc above upper boundary
+
+    // priority with invalid value
+
+    // status with invalid value
+
+    // assignee_id negative value
+    // assignee_id nullable value
+    // assignee_id omitted value
+    // assignee_id decimal value
+    // assignee_id string value
 });
