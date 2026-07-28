@@ -207,10 +207,16 @@ describe('updateIssueSchema', () => {
             expect(updateIssueSchema.safeParse({ ...inputWithoutPriority, priority: 'notapriority' }).success).toBe(false);
         });
     });
+
+    describe('status field validation', () => {
+        const { status, ...inputWithoutStatus } = validInput;
+
+        it('rejects a issue when status has invalid value', () => {
+            expect(updateIssueSchema.safeParse({ ...inputWithoutStatus, status: 'notastatus' }).success).toBe(false);
+        });
+    });
    
   
-
-    // priority with invalid value
 
     // status with invalid value
 
