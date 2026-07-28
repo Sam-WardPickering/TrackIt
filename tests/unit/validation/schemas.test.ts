@@ -167,7 +167,10 @@ describe('updateIssueSchema', () => {
     it('accepts an issue with on one input', () => {
         expect(updateIssueSchema.safeParse({ title: 'title' }).success).toBe(true);
     });
-    // only one field
+   
+    it('rejects an issue with no inputs', () => {
+        expect(updateIssueSchema.safeParse({}).success).toBe(false);
+    });
     // no fields
 
     // title below lower boundary
