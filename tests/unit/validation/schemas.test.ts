@@ -164,7 +164,7 @@ describe('updateIssueSchema', () => {
         expect(updateIssueSchema.safeParse(validInput).success).toBe(true);
     });
 
-    it('accepts an issue with on one input', () => {
+    it('accepts an issue with only one input', () => {
         expect(updateIssueSchema.safeParse({ title: 'title' }).success).toBe(true);
     });
    
