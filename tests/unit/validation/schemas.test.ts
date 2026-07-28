@@ -189,6 +189,16 @@ describe('updateIssueSchema', () => {
             expect(updateIssueSchema.safeParse({ ...validInput, title: 'A'.repeat(121) }).success).toBe(false);
         });
     });
+
+    describe('description field validation', () => {
+        it('accepts an issue when desc field is at upper boundary', () => {
+            expect(updateIssueSchema.safeParse({ ...validInput, description: 'A'.repeat(5000) }).success).toBe(true);
+        });
+
+        it('rejects an issue when desc field is over upper boundary', () => {
+            expect(updateIssueSchema.safeParse({ ...validInput, description: 'A'.repeat(5001) }).success).toBe(false);
+        });
+    })
    
     // desc upper boundary
     // desc above upper boundary
