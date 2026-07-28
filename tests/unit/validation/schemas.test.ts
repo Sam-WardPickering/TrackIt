@@ -171,13 +171,25 @@ describe('updateIssueSchema', () => {
     it('rejects an issue with no inputs', () => {
         expect(updateIssueSchema.safeParse({}).success).toBe(false);
     });
-    // no fields
+    
+    describe('title field validation', () => {
+        it('rejects an issue when title is below boundary', () => {
+            expect(updateIssueSchema.safeParse({ ...validInput, title: 'qw' }).success).toBe(false);
+        });
 
-    // title below lower boundary
-    // title lower boundary
-    // title upper boundary
-    // title above upper boundary
+        it('accepts an issue when title is at lower boundary', () => {
+            expect(updateIssueSchema.safeParse({ ...validInput, title: 'qwe' }).success).toBe(true);
+        });
 
+        it('accepts an issue when title is at upper boundary', () => {
+            expect(updateIssueSchema.safeParse({ ...validInput, title: 'A'.repeat(120) }).success).toBe(true);
+        });
+
+        it('rejects an issue when title is above upper boundary', () => {
+            expect(updateIssueSchema.safeParse({ ...validInput, title: 'A'.repeat(121) }).success).toBe(false);
+        });
+    });
+   
     // desc upper boundary
     // desc above upper boundary
 
