@@ -198,10 +198,17 @@ describe('updateIssueSchema', () => {
         it('rejects an issue when desc field is over upper boundary', () => {
             expect(updateIssueSchema.safeParse({ ...validInput, description: 'A'.repeat(5001) }).success).toBe(false);
         });
-    })
+    });
+
+    describe('priority field validation', () => {
+        const { priority, ...inputWithoutPriority } = validInput;
+
+        it('rejects a issue when priority has invalid value', () => {
+            expect(updateIssueSchema.safeParse({ ...inputWithoutPriority, priority: 'notapriority' }).success).toBe(false);
+        });
+    });
    
-    // desc upper boundary
-    // desc above upper boundary
+  
 
     // priority with invalid value
 
