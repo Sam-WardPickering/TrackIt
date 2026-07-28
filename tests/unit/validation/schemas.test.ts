@@ -164,7 +164,9 @@ describe('updateIssueSchema', () => {
         expect(updateIssueSchema.safeParse(validInput).success).toBe(true);
     });
 
-    // happy path
+    it('accepts an issue with on one input', () => {
+        expect(updateIssueSchema.safeParse({ title: 'title' }).success).toBe(true);
+    });
     // only one field
     // no fields
 
