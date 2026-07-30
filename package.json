@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "TrackIt issue tracker — application under test for a full QA portfolio suite",
   "scripts": {
     "dev:server": "npm --prefix server run dev",
     "dev:client": "npm --prefix client run dev",
-    "seed": "npm --prefix server run seed"
+    "seed": "npm --prefix server run seed",
+    "test:unit": "vitest run"
   },
+  "description": "TrackIt issue tracker — application under test for a full QA portfolio suite",
   "devDependencies": {
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
