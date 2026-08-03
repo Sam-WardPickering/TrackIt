@@ -34,8 +34,8 @@ test('POST /api/auth/login - invalid email', async ({ request }) => {
 test('POST /api/auth/login - invalid password', async ({ request }) => {
     const response = await request.post('/api/auth/login', {
         data: {
-            email: 'invalid.admin@trackit.test',
-            password: 'Password123', 
+            email: 'admin@trackit.test',
+            password: 'password1234', 
         },
     });
 
@@ -44,3 +44,20 @@ test('POST /api/auth/login - invalid password', async ({ request }) => {
     const body = await response.json();
     expect(body.error).toBe('Invalid credentials');
 });
+
+
+test('POST /api/auth/login - missing credentials', async ({ request }) => {
+    const response = await request.post('/api/auth/login', {
+        data: {},
+    });
+
+    expect(response.status()).toBe(400);
+    
+    const body = await response.json();
+    expect(body.details[0].field).toBe('email');
+    expect(body.details[0].message).toBe('Required');
+    expect(body.details[1].field).toBe('password');
+    expect(body.details[1].message).toBe('Required');
+});
+
+
