@@ -61,3 +61,20 @@ test('POST /api/auth/login - missing credentials', async ({ request }) => {
 });
 
 
+test('POST /api/auth/login - invalid email format', async ({ request }) => {
+    const response = await request.post('/api/auth/login', {
+        data: {
+            email: 'notanemail',
+            password: 'Password123', 
+        },
+    });
+
+    expect(response.status()).toBe(400);
+    
+    const body = await response.json();
+    expect(body.error).toBe('Validation failed');
+    expect(body.details[0].field).toBe('email');
+    expect(body.details[0].message).toBe('Invalid email address');
+});
+
+
