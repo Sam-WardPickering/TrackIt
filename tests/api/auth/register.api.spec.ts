@@ -50,5 +50,35 @@ test('POST /api/auth/register - invalid email format', async ({ request }) => {
     expect(body.details[0].message).toBe('Invalid email address');
 });
 
-    // console.log(response.status());
-    // console.log(await response.json());
+
+test('POST /api/auth/register - missing fields', async ({ request }) => {
+    const response = await request.post('/api/auth/register', { data: {} });
+
+    expect(response.status()).toBe(400);
+
+    const body = await response.json();
+    expect(body.error).toBe('Validation failed');
+    expect(body.details[0].field).toBe('email');
+    expect(body.details[0].message).toBe('Required');
+    expect(body.details[1].field).toBe('password');
+    expect(body.details[1].message).toBe('Required');
+    expect(body.details[2].field).toBe('name');
+    expect(body.details[2].message).toBe('Required');
+});
+
+test('POST /api/auth/register - invalid password', async ({ request }) => {
+    const userData = {
+        email: `testuser-${Date.now()}@email.com`,
+        password: '67',
+        name: 'Invalid Password',
+    };
+
+    const response = await request.post('/api/auth/register', { data: userData });
+
+    expect(response.status()).toBe(400);
+
+    const body = await response.json();
+    expect(body.error).toBe('Validation failed');
+    expect(body.details[0].field).toBe('password');
+    expect(body.details[0].message).toBe('Password must be at least 8 characters');
+});
