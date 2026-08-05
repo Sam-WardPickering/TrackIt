@@ -80,6 +80,17 @@ test.describe('GET /api/issues/:id', () => {
         const body = await response.json();
         expect(body.issue).toEqual(issue);
     });
+
+    test('no id returns 404', async ({ request, token }) => {
+        const response = await request.get('/api/issues/abc', {
+            headers: { Authorization: `Bearer ${token}` },
+        });
+
+        expect(response.status()).toBe(404);
+        
+        const body = await response.json();
+        expect(body.error).toEqual('Issue not found');
+    });
 });
 
 
