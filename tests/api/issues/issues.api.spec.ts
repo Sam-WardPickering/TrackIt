@@ -30,6 +30,21 @@ test.describe('GET /api/issues', () => {
             expect(issue.status).toBe('in_progress');
         });
     });
+
+    test('filter by priority', async ({ request, token }) => {
+        const response = await request.get('/api/issues?priority=high', {
+            headers: { Authorization: `Bearer ${token}` },
+        });
+
+        expect(response.status()).toBe(200);
+        
+        const body = await response.json();
+        expect(body.issues.length).toBeGreaterThan(0);
+        
+        body.issues.forEach((issue: any) => {
+            expect(issue.priority).toBe('high');
+        });
+    });
 });
 
 
