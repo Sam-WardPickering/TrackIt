@@ -94,7 +94,29 @@ test.describe('GET /api/issues/:id', () => {
 });
 
 test.describe('POST /api/issues', () => {
-    //  Create with valid data → 201
+
+    test('create issue (happy path)', async ({ request, token }) => {
+        const validIssue = {
+            title: `new issue - ${Date.now()}`,
+            description: 'new issue description',
+            priority: 'low',
+            assignee_id: 1
+        };
+        const response = await request.post('/api/issues', {
+            headers: { Authorization: `Bearer ${token}` },
+            data: validIssue,
+        });
+
+        expect(response.status()).toBe(201);
+
+        const body = await response.json();
+        expect(body.issue.title).toBe(validIssue.title);
+        expect(body.issue.description).toBe(validIssue.description);
+        expect(body.issue.priority).toBe(validIssue.priority);
+        expect(body.issue.assignee_id).toBe(validIssue.assignee_id);
+    });
+
+
     //  Validation failures (short title, invalid priority)
     //  No auth → 401
 });
