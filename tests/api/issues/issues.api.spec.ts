@@ -46,7 +46,7 @@ test.describe('GET /api/issues', () => {
         });
     });
 
-    test('no auth token', async ({ request, token }) => {
+    test('no auth token', async ({ request }) => {
         const response = await request.get('/api/issues?priority=high', {
             headers: {},
         });
