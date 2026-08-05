@@ -93,6 +93,12 @@ test.describe('GET /api/issues/:id', () => {
     });
 });
 
+test.describe('POST /api/issues', () => {
+    //  Create with valid data → 201
+    //  Validation failures (short title, invalid priority)
+    //  No auth → 401
+});
+
 
 
 
