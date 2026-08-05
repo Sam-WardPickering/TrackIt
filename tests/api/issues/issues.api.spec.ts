@@ -58,6 +58,30 @@ test.describe('GET /api/issues', () => {
     });
 });
 
+test.describe('GET /api/issues/:id', () => {
+
+    test('valid id returns correct issue', async ({ request, token }) => {
+        // Get all issues
+        const allIssuesResponse = await request.get('/api/issues', {
+            headers: { Authorization: `Bearer ${token}` },
+        });
+
+        expect(allIssuesResponse.status()).toBe(200);
+
+        const issue = (await allIssuesResponse.json()).issues[0];
+
+        // Get issue by id
+        const response = await request.get(`/api/issues/${issue.id}`, {
+            headers: { Authorization: `Bearer ${token}` },
+        });
+
+        expect(response.status()).toBe(200);
+        
+        const body = await response.json();
+        expect(body.issue).toEqual(issue);
+    });
+});
+
 
 
 
