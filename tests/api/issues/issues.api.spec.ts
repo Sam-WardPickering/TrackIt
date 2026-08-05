@@ -45,6 +45,17 @@ test.describe('GET /api/issues', () => {
             expect(issue.priority).toBe('high');
         });
     });
+
+    test('no auth token', async ({ request, token }) => {
+        const response = await request.get('/api/issues?priority=high', {
+            headers: {},
+        });
+
+        expect(response.status()).toBe(401);
+
+        const body = await response.json();
+        expect(body.error).toBe('Missing or malformed Authorization header');
+    });
 });
 
 
