@@ -175,5 +175,10 @@ test.describe('DELETE /api/issues/:id', () => {
 
         const issue = (await createResponse.json()).issue;
 
+        const deleteResponse = await request.delete(`/api/issues/${issue.id}`, {
+            headers: { Authorization: `Bearer ${token}` },
+        });
+
+        expect(deleteResponse.status()).toBe(204);
     });
 });
