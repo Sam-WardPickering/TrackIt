@@ -115,14 +115,4 @@ test.describe('POST /api/issues', () => {
         expect(body.issue.priority).toBe(validIssue.priority);
         expect(body.issue.assignee_id).toBe(validIssue.assignee_id);
     });
-
-
-    //  Validation failures (short title, invalid priority)
-    //  No auth → 401
 });
-
-
-
-
-//    console.log(response.status());
-//    console.log(await response.json());
