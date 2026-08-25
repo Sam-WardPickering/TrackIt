@@ -165,6 +165,15 @@ test.describe('PATCH /api/issues/:id', () => {
 
 test.describe('DELETE /api/issues/:id', () => {
     test('delete an issue', async ({ request, token }) => {
+        //create issue
+        const createResponse = await request.post('/api/issues', {
+            headers: { Authorization: `Bearer ${token}` },
+            data: { title: 'Delete Test Issue' },
+        });
+
+        expect(createResponse.status()).toBe(201);
+
+        const issue = (await createResponse.json()).issue;
 
     });
 });
