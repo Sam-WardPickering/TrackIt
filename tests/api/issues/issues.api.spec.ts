@@ -162,3 +162,9 @@ test.describe('PATCH /api/issues/:id', () => {
         expect(body.error).toBe("Cannot transition from 'open' to 'resolved'");
     });
 });
+
+test.describe('DELETE /api/issues/:id', () => {
+    test('delete an issue', async ({ request, token }) => {
+
+    });
+});
