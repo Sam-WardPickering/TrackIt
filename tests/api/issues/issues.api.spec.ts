@@ -139,7 +139,7 @@ test.describe('PATCH /api/issues/:id', () => {
         expect(body.issue.status).toBe('in_progress');
     });
 
-     test('illegal status transition', async ({ request, token }) => {
+    test('illegal status transition', async ({ request, token }) => {
         //create issue
         const createResponse = await request.post('/api/issues', {
             headers: { Authorization: `Bearer ${token}` },
