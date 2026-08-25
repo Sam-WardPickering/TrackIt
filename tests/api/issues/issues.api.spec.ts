@@ -116,3 +116,9 @@ test.describe('POST /api/issues', () => {
         expect(body.issue.assignee_id).toBe(validIssue.assignee_id);
     });
 });
+
+test.describe('PATCH /api/issues/:id', () => {
+    test('legal status transition', async ({ request, token }) => {
+
+    });
+});
