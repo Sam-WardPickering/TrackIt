@@ -138,4 +138,25 @@ test.describe('PATCH /api/issues/:id', () => {
         const body = await patchResponse.json();
         expect(body.issue.status).toBe('in_progress');
     });
+
+     test('illegal status transition', async ({ request, token }) => {
+        //create issue
+        const createResponse = await request.post('/api/issues', {
+            headers: { Authorization: `Bearer ${token}` },
+            data: { title: 'Patch Test Issue' },
+        });
+
+        const issue = (await createResponse.json()).issue;
+
+        // Change issue status to in_progress
+        const patchResponse = await request.patch(`/api/issues/${issue.id}` , {
+            headers: { Authorization: `Bearer ${token}` },
+            data: { status: 'resolved' },
+        });
+
+        expect(patchResponse.status()).toBe(422);
+
+        const body = await patchResponse.json();
+        console.log(body);
+    });
 });
