@@ -148,6 +148,8 @@ test.describe('PATCH /api/issues/:id', () => {
 
         const issue = (await createResponse.json()).issue;
 
+        expect(issue.status).toBe('open');
+
         // Change issue status to in_progress
         const patchResponse = await request.patch(`/api/issues/${issue.id}` , {
             headers: { Authorization: `Bearer ${token}` },
@@ -157,6 +159,6 @@ test.describe('PATCH /api/issues/:id', () => {
         expect(patchResponse.status()).toBe(422);
 
         const body = await patchResponse.json();
-        console.log(body);
+        expect(body.error).toBe("Cannot transition from 'open' to 'resolved'");
     });
 });
