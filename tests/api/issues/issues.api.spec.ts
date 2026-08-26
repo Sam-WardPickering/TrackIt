@@ -182,3 +182,19 @@ test.describe('DELETE /api/issues/:id', () => {
         expect(deleteResponse.status()).toBe(204);
     });
 });
+
+test.describe('Issue ownership enforcement', () => {
+    test('member cannot delete another users issue', async ({ request, token }) => {
+        //create issue
+        const createResponse = await request.post('/api/issues', {
+            headers: { Authorization: `Bearer ${token}` },
+            data: { title: 'Admin Test Issue' },
+        });
+
+        expect(createResponse.status()).toBe(201);
+
+        const issue = (await createResponse.json()).issue;
+
+       git
+    });
+});
