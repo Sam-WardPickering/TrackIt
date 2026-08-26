@@ -185,7 +185,7 @@ test.describe('DELETE /api/issues/:id', () => {
 
 test.describe('Issue ownership enforcement', () => {
     test('member cannot delete another users issue', async ({ request, token }) => {
-        //create issue ad admin
+        //create issue as admin
         const createResponse = await request.post('/api/issues', {
             headers: { Authorization: `Bearer ${token}` },
             data: { title: 'Admin Test Issue' },
@@ -213,5 +213,12 @@ test.describe('Issue ownership enforcement', () => {
 
         const body = await deleteResponse.json();
         expect(body.error).toBe('You do not have permission to delete this issue');
+
+        // Verify issue still exists
+        const getResponse = await request.get(`/api/issues/${issue.id}`, {
+            headers: { Authorization: `Bearer ${memberToken}` },
+        });
+        
+        expect(getResponse.status()).toBe(200);
     });
 });
