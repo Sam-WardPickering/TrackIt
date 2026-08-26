@@ -185,7 +185,7 @@ test.describe('DELETE /api/issues/:id', () => {
 
 test.describe('Issue ownership enforcement', () => {
     test('member cannot delete another users issue', async ({ request, token }) => {
-        //create issue
+        //create issue ad admin
         const createResponse = await request.post('/api/issues', {
             headers: { Authorization: `Bearer ${token}` },
             data: { title: 'Admin Test Issue' },
@@ -195,6 +195,23 @@ test.describe('Issue ownership enforcement', () => {
 
         const issue = (await createResponse.json()).issue;
 
-       git
+        // Log in as member
+        const loginResponse = await request.post('/api/auth/login', {
+            data: {
+                email: 'member@trackit.test',
+                password: 'Password123',
+            },
+        });
+
+        const memberToken = (await loginResponse.json()).token;
+
+        const deleteResponse = await request.delete(`/api/issues/${issue.id}`, {
+            headers: { Authorization: `Bearer ${memberToken}` },
+        });
+
+        expect(deleteResponse.status()).toBe(403);
+
+        const body = await deleteResponse.json();
+        expect(body.error).toBe('You do not have permission to delete this issue');
     });
 });
