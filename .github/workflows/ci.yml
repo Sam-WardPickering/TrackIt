@@ -55,3 +55,22 @@ jobs:
           run: cd server && npm ci
         - name: Run unit tests
           run: npm run test:unit
+  api-tests:
+  name: API tests
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 20
+    - name: Install root dependencies
+      run: npm ci
+    - name: Install server dependencies
+      run: cd server && npm ci
+    - name: Seed database
+      run: cd server && npm run seed
+    - name: Start server and run tests
+      run: |
+        cd server && npm run dev &
+        sleep 3
+        npm run test:api
