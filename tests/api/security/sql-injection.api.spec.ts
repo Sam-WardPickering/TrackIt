@@ -17,8 +17,11 @@ test.describe('POST /api/auth/login', () => {
                 }
             });
 
-            console.log(response.status());
-            console.log(await response.json());
+            expect(response.status()).toBe(400);
+
+            const body = await response.json();
+            expect(body.error).toBe('Validation failed');
+            expect(body.details[0].message).toBe('Invalid email address');
         });
     }
 });
