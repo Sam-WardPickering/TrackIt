@@ -1,4 +1,4 @@
-import { test, expect } from '../fixtures/auth.fixture';
+import { test, expect } from '../../fixtures/auth.fixture';
 
 const sqlInjectionPayloads = [
     "' OR '1'='1",
