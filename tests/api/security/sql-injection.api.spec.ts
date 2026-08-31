@@ -23,5 +23,20 @@ test.describe('POST /api/auth/login', () => {
             expect(body.error).toBe('Validation failed');
             expect(body.details[0].message).toBe('Invalid email address');
         });
+
+        test(`Password field - SQL injection: ${payload}`, async ({ request }) => {
+            const response = await request.post('/api/auth/login', {
+                data: {
+                    email: 'admin@trackit.test',
+                    password: payload,
+                }
+            });
+
+            expect(response.status()).toBe(401);
+
+            const body = await response.json();
+            expect(body.error).toBe('Invalid credentials');
+        });
     }
+
 });
