@@ -44,14 +44,14 @@ test.describe('POST /api/auth/login', () => {
 test.describe('GET /api/issues - filter injection', () => {
     for (const payload of sqlInjectionPayloads) {
         test(`Status filter - SQL injection: ${payload}`, async ({ request, token }) => {
-            const response = await request.get(`/api/issues?sstatus=${encodeURIComponent(payload)}`, {
-                headers: { Authorization: `Bearer: ${token}` },
+            const response = await request.get(`/api/issues?status=${encodeURIComponent(payload)}`, {
+                headers: { Authorization: `Bearer ${token}` },
             });
 
-            expect(response.status()).toBe(401);
+            expect(response.status()).toBe(200);
 
             const body = await response.json();
-            expect(body.error).toBe('Missing or malformed Authorization header');
+            expect(body.issues).toEqual([]);
         });
     }
 });
