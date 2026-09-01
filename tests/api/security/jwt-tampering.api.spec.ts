@@ -19,4 +19,12 @@ test.describe('JWT tampering', () => {
 
         expect(response.status()).toBe(401);
     });
+
+    test('rejected a token without Bearer prefix', async ({ request, token }) => {
+        const response = await request.get('/api/issues', {
+            headers: { Authorization: token },
+        });
+
+        expect(response.status()).toBe(401);
+    });
 });
