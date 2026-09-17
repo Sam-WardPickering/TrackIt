@@ -57,20 +57,20 @@ jobs:
           run: npm run test:unit
 
   api-tests:
-    name: API tests
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - name: Install root dependencies
-        run: npm ci
-      - name: Build and start server container
-        run: |
-          cd server
-          docker build -t trackit-server .
-          docker run -d -p 4000:4000 trackit-server
-          sleep 3
-      - name: Run API tests
-        run: npm run test:api
+      name: API tests
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+        - uses: actions/setup-node@v4
+          with:
+            node-version: 20
+        - name: Install root dependencies
+          run: npm ci
+        - name: Build and start server container
+          run: |
+            cd server
+            docker build -t trackit-server .
+            docker run -d -p 4000:4000 trackit-server
+            sleep 3
+        - name: Run API tests
+          run: npm run test:api
