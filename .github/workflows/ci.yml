@@ -71,6 +71,12 @@ jobs:
             cd server
             docker build -t trackit-server .
             docker run -d -p 4000:4000 trackit-server
-            sleep 3
+        - name: Wait for server to be ready
+          run: |
+            for i in $(seq 1 30); do
+              curl -sf http://localhost:4000/health && exit 0
+              sleep 1
+            done
+            echo "Server never became ready" && exit 1
         - name: Run API tests
           run: npm run test:api
