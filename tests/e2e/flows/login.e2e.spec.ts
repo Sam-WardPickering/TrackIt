@@ -25,4 +25,16 @@ test.describe('Login', () => {
         await expect(page).toHaveURL(/\/login$/);
         await expect(loginPage.heading).toBeVisible();
     });
+
+    test('Empty form shows a validation error and stays on /login', async ({ page }) => {
+        const loginPage = new LoginPage(page);
+
+        await loginPage.goto();
+
+        await loginPage.submitButton.click();
+
+        await expect(loginPage.errorMessage).toHaveText('Validation failed');
+        await expect(page).toHaveURL(/\/login$/);
+        await expect(loginPage.heading).toBeVisible();
+    }); 
 });
