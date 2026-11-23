@@ -13,4 +13,17 @@ test.describe('Login', () => {
         await expect(page).toHaveURL(/\/issues$/);
         await expect(page.getByTestId('issues-list')).toBeVisible();
     });
+
+    test('Wrong password errors and stays on /login', async ({ page }) => {
+        const loginPage = new LoginPage(page);
+
+        await loginPage.goto();
+
+        await loginPage.login(users.admin.email, 'password1234');
+
+        await expect(page).toHaveURL(/\/login$/);
+        await expect(page.getByRole('heading', { name: 'Sign in to TrackIt' })).toBeVisible();
+        await expect(page.getByTestId('login-error')).toBeVisible();
+        await expect(page.getByTestId('login-error')).toHaveText('Invalid credentials');
+    });
 });
