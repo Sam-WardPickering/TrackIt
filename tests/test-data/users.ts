@@ -5,6 +5,6 @@ export const users = {
     },
     member: {
         email: 'member@trackit.test',
-        password: 'Password123'
+        password: 'Password123',
     },
 };
