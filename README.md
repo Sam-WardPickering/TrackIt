@@ -8,11 +8,11 @@ accessibility tests planned next.
     ┌─────────────────────────────────────┐
     │           E2E (planned)             │  ← Playwright browser tests
     ├─────────────────────────────────────┤
-    │         API tests (22)              │  ← Playwright API testing
+    │         API tests (23)              │  ← Playwright API testing
     ├─────────────────────────────────────┤
     │      Security tests (15)            │  ← SQL injection, JWT tampering
     ├─────────────────────────────────────┤
-    │        Unit tests (95)              │  ← Vitest + React Testing Library
+    │        Unit tests (94)              │  ← Vitest + React Testing Library
     └─────────────────────────────────────┘
 
 
@@ -30,7 +30,7 @@ accessibility tests planned next.
 - `data-test` attributes throughout for stable test selectors
 
 **Infrastructure**
-- Docker container for the server (Alpine-based)
+- Docker containers for the server and client (Alpine-based), run together with Docker Compose
 - GitHub Actions CI — 4 parallel jobs
 
 ## Getting started
@@ -56,6 +56,13 @@ docker build -t trackit-server .
 docker run -p 4000:4000 trackit-server
 ```
 
+### Run with Docker Compose
+
+```bash
+docker compose up --build    # server on :4000, client on :5173
+docker compose down          # stop and remove containers
+```
+
 ### Seeded credentials (dev only)
 
 | Role   | Email                | Password     |
@@ -75,7 +82,7 @@ npm run test:api        # server must be running on :4000
 
 ## Test suite breakdown
 
-### Unit tests — 95 tests (Vitest)
+### Unit tests — 94 tests (Vitest)
 
 | File | Tests | What it covers |
 | ---- | ----- | -------------- |
@@ -89,13 +96,13 @@ npm run test:api        # server must be running on :4000
 
 Component tests use `happy-dom` via per-file directive. Unit tests run with Vitest + `@vitejs/plugin-react`.
 
-### API tests — 22 tests (Playwright)
+### API tests — 23 tests (Playwright)
 
 | File | Tests | What it covers |
 | ---- | ----- | -------------- |
 | `login.api.spec.ts` | 5 | Valid login, wrong email/password, missing fields, invalid format |
 | `register.api.spec.ts` | 5 | Happy path (unique email via `Date.now()`), duplicate, validation |
-| `issues.api.spec.ts` | 10 | CRUD, status filter, priority filter, legal/illegal transitions, no-auth 401 |
+| `issues.api.spec.ts` | 11 | CRUD, status filter, priority filter, legal/illegal transitions, no-auth 401 |
 | `users.api.spec.ts` | 2 | Admin stats endpoint: admin 200, member 403 (RBAC) |
 
 Also includes ownership enforcement: member cannot delete admin's issue (403), with verification the issue still exists after the failed delete.
@@ -145,4 +152,3 @@ testing seam in the codebase, organized by test type.
 - Accessibility scans with axe-core
 - ZAP baseline security scan in CI
 - k6 performance smoke test
-- Docker Compose for full-stack local setup
