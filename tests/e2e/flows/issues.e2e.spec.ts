@@ -11,7 +11,7 @@ test.describe('Issues', () => {
         await expect(page).toHaveURL(/\/issues$/);
     });
 
-    test('Happy path - create an issue', async ({ page }) => {
+    test('Creating an issue shows it in the list with a success notice', async ({ page }) => {
         const issuesPage = new IssuesPage(page);
         const title = `E2E create ${Date.now()}`;
 
