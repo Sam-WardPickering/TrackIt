@@ -9,5 +9,15 @@ test.describe('Issues', () => {
         await loginPage.goto();
         await loginPage.login(users.admin.email, users.admin.password);
         await expect(page).toHaveURL(/\/issues$/);
-    })
+    });
+
+    test('Happy path - create an issue', async ({ page }) => {
+        const issuesPage = new IssuesPage(page);
+        const title = `E2E create ${Date.now()}`;
+
+        await issuesPage.createIssue(title);
+
+        await expect(issuesPage.notice).toHaveText('Issue created.');
+        await expect(issuesPage.issuesList.getByText(title)).toBeVisible();
+    });
 });
