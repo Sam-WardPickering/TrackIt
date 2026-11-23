@@ -21,9 +21,8 @@ test.describe('Login', () => {
 
         await loginPage.login(users.admin.email, 'password1234');
 
+        await expect(loginPage.errorMessage).toHaveText('Invalid credentials');
         await expect(page).toHaveURL(/\/login$/);
-        await expect(page.getByRole('heading', { name: 'Sign in to TrackIt' })).toBeVisible();
-        await expect(page.getByTestId('login-error')).toBeVisible();
-        await expect(page.getByTestId('login-error')).toHaveText('Invalid credentials');
+        await expect(loginPage.heading).toBeVisible();
     });
 });

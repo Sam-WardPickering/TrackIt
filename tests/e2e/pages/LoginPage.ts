@@ -6,6 +6,7 @@ export class LoginPage {
     readonly passwordInput: Locator;
     readonly submitButton: Locator;
     readonly errorMessage: Locator;
+    readonly heading:  Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -13,6 +14,8 @@ export class LoginPage {
         this.passwordInput = page.getByTestId('password');
         this.submitButton = page.getByTestId('login-submit');
         this.errorMessage = page.getByTestId('login-error');
+        this.heading = page.getByRole('heading', { name: 'Sign in to TrackIt' });
+    
     }
 
     async goto() {
