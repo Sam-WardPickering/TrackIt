@@ -8,7 +8,8 @@
     "dev:client": "npm --prefix client run dev",
     "seed": "npm --prefix server run seed",
     "test:unit": "vitest run",
-    "test:api": "npx playwright test"
+    "test:api": "npx playwright test --project=api",
+    "test:e2e": "npx playwright test --project=e2e"
   },
   "description": "TrackIt issue tracker — application under test for a full QA portfolio suite",
   "devDependencies": {
