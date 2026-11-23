@@ -37,4 +37,13 @@ test.describe('Login', () => {
         await expect(page).toHaveURL(/\/login$/);
         await expect(loginPage.heading).toBeVisible();
     }); 
+
+    test('Visiting /issues while logged out redirects to /login', async ({ page }) => {
+        const loginPage = new LoginPage(page);
+
+        await page.goto('/issues');
+
+        await expect(page).toHaveURL(/\/login$/);
+        await expect(loginPage.heading).toBeVisible();
+    });
 });
