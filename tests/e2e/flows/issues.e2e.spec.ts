@@ -52,6 +52,6 @@ test.describe('Issues', () => {
         await issuesPage.filterByStatus('open');
 
         await expect(issuesPage.row(titleOpen).getByTestId('status-badge-open')).toBeVisible();
-        await expect(issuesPage.row(titleClosed).getByTestId('status-badge-closed')).not.toBeVisible();
+        await expect(issuesPage.row(titleClosed)).toHaveCount(0);
     });
 });
