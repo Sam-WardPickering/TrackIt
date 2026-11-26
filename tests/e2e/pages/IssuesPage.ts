@@ -23,4 +23,14 @@ export class IssuesPage {
         await this.titleInput.fill(title);
         await this.addButton.click();
     }
+
+    row(title: string): Locator {
+        return this.issuesList.getByRole('listitem').filter({ hasText: title });
+    }
+
+    async changeStatus(title: string, status: string) {
+        await this.page
+        .getByRole('combobox', { name: `Change status for: ${title}` })
+        .selectOption(status);
+    }
 }
