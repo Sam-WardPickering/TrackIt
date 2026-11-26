@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
 import { IssuesPage } from '../pages/IssuesPage';
 import { users } from '../../test-data/users';
-import { createUniqueTitle } from '../../helpers/issues';
+import { uniqueTitle } from '../../helpers/issues';
 
 test.describe('Issues', () => {
     test.beforeEach(async ({ page }) => {
@@ -14,7 +14,7 @@ test.describe('Issues', () => {
 
     test('Creating an issue shows it in the list with a success notice', async ({ page }) => {
         const issuesPage = new IssuesPage(page);
-        const title = createUniqueTitle('create');
+        const title = uniqueTitle('create');
         await issuesPage.createIssue(title);
 
         await expect(issuesPage.notice).toHaveText('Issue created.');
