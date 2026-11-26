@@ -1,3 +1,4 @@
-export function createUniqueTitle(): string {
-    return `E2E create ${Date.now()}`;
-};
+export function uniqueTitle(label: string): string {
+    const random = Math.random().toString(36).slice(2, 8);
+    return `E2E ${label} ${Date.now()}-${random}`;
+}

@@ -14,7 +14,7 @@ test.describe('Issues', () => {
 
     test('Creating an issue shows it in the list with a success notice', async ({ page }) => {
         const issuesPage = new IssuesPage(page);
-        const title = createUniqueTitle();
+        const title = createUniqueTitle('create');
         await issuesPage.createIssue(title);
 
         await expect(issuesPage.notice).toHaveText('Issue created.');
