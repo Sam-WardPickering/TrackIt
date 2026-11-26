@@ -37,7 +37,6 @@ export class IssuesPage {
     }
 
     async filterByStatus(status: string) {
-        await this.statusFilter
-        .selectOption(status);
+        await this.statusFilter.selectOption(status);
     }
 }

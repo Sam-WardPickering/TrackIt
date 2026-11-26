@@ -35,4 +35,23 @@ test.describe('Issues', () => {
         await expect(issuesPage.notice).toHaveText(/moved to In Progress\./);
         await expect(issuesPage.row(title).getByTestId('status-badge-in_progress')).toBeVisible();
     });
+
+    test('Filtering by Open shows only open issues', async ({ page }) => {
+        const issuesPage = new IssuesPage(page);
+        const titleOpen = uniqueTitle('filter-open');
+        const titleClosed = uniqueTitle('filter-closed');
+
+        await issuesPage.createIssue(titleOpen);
+        await expect(issuesPage.row(titleOpen).getByTestId('status-badge-open')).toBeVisible();
+
+        await issuesPage.createIssue(titleClosed);
+        await issuesPage.changeStatus(titleClosed, 'closed');
+        await expect(issuesPage.notice).toHaveText(/moved to Closed\./);
+        await expect(issuesPage.row(titleClosed).getByTestId('status-badge-closed')).toBeVisible();
+
+        await issuesPage.filterByStatus('open');
+
+        await expect(issuesPage.row(titleOpen).getByTestId('status-badge-open')).toBeVisible();
+        await expect(issuesPage.row(titleClosed).getByTestId('status-badge-closed')).not.toBeVisible();
+    });
 });
