@@ -32,6 +32,7 @@ test.describe('Issues', () => {
         await expect(issuesPage.row(title).getByTestId('status-badge-open')).toBeVisible();
         
         await issuesPage.changeStatus(title, 'in_progress');
+        await expect(issuesPage.notice).toHaveText(/moved to In Progress\./);
         await expect(issuesPage.row(title).getByTestId('status-badge-in_progress')).toBeVisible();
     });
 });
