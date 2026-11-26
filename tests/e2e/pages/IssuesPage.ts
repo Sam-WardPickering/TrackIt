@@ -6,6 +6,7 @@ export class IssuesPage {
     readonly addButton: Locator;
     readonly issuesList: Locator;
     readonly notice: Locator;
+    readonly statusFilter: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -13,6 +14,7 @@ export class IssuesPage {
         this.addButton = page.getByTestId('create-issue-submit');
         this.issuesList = page.getByTestId('issues-list');
         this.notice = page.getByTestId('issues-notice');
+        this.statusFilter = page.getByTestId('status-filter');
     }
 
     async goto() {
@@ -31,6 +33,11 @@ export class IssuesPage {
     async changeStatus(title: string, status: string) {
         await this.page
         .getByRole('combobox', { name: `Change status for: ${title}` })
+        .selectOption(status);
+    }
+
+    async filterByStatus(status: string) {
+        await this.statusFilter
         .selectOption(status);
     }
 }
