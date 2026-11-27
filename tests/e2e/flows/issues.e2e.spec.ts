@@ -61,7 +61,7 @@ test.describe('Issues', () => {
 
         await issuesPage.createIssue(title);
         await expect(issuesPage.notice).toHaveText('Issue created.');
-        await expect(issuesPage.issuesList.getByText(title)).toBeVisible();
+        await expect(issuesPage.row(title)).toBeVisible();
 
         await issuesPage.deleteIssue(title);
 
