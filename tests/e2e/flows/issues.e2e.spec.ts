@@ -56,6 +56,16 @@ test.describe('Issues', () => {
     });
 
     test('Deleting an issue removes it from the list', async ({ page }) => {
+        const issuesPage = new IssuesPage(page);
+        const title = uniqueTitle('delete');
 
+        await issuesPage.createIssue(title);
+        await expect(issuesPage.notice).toHaveText('Issue created.');
+        await expect(issuesPage.issuesList.getByText(title)).toBeVisible();
+
+        await issuesPage.deleteIssue(title);
+
+        await expect(issuesPage.notice).toHaveText(/deleted\./);
+        await expect(issuesPage.row(title)).toHaveCount(0);
     });
 });
