@@ -39,4 +39,8 @@ export class IssuesPage {
     async filterByStatus(status: string) {
         await this.statusFilter.selectOption(status);
     }
+
+    async deleteIssue(title: string) {
+        await this.page.getByRole('button', { name: `Delete issue: ${ title }`}).click();
+    }
 }

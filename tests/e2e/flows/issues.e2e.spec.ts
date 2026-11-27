@@ -54,4 +54,8 @@ test.describe('Issues', () => {
         await expect(issuesPage.row(titleOpen).getByTestId('status-badge-open')).toBeVisible();
         await expect(issuesPage.row(titleClosed)).toHaveCount(0);
     });
+
+    test('Deleting an issue removes it from the list', async ({ page }) => {
+
+    });
 });
