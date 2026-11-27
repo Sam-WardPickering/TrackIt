@@ -5,14 +5,14 @@ export class RegisterPage {
     readonly nameInput: Locator;
     readonly emailInput: Locator;
     readonly passwordInput: Locator;
-    readonly createAccountBtn: Locator;
+    readonly submitButton: Locator;
 
     constructor(page: Page) {
         this.page = page;
         this.nameInput = page.getByTestId('name');
         this.emailInput = page.getByTestId('email');
         this.passwordInput = page.getByTestId('password');
-        this.createAccountBtn = page.getByTestId('register-submit');
+        this.submitButton = page.getByTestId('register-submit');
     }
 
     async goto() {
@@ -23,6 +23,6 @@ export class RegisterPage {
         await this.nameInput.fill(name);
         await this.emailInput.fill(email);
         await this.passwordInput.fill(password);
-        await this.createAccountBtn.click();
+        await this.submitButton.click();
     }
 }
